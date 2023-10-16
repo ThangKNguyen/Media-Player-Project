@@ -1,4 +1,6 @@
 # CS151-Media-Player-Project
+Proposal
+
 Media Player Project
 
 Team 11: Media Player
