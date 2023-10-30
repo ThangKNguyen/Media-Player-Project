@@ -1,4 +1,4 @@
-| Diagram File Name | #1    | #2    |  #1    | #2    |
+| Diagram Name | Class Diagram    | Sequence Diagram   |  State Diagram   | Use Case Diagram    |
 | :---:   | :---: | :---: |:---: | :---: |
 | Description | 301   | 283   |  301   | 283   |
-| Link to file | 301   | 283   |  301   | 283   |
+| Link to file | [Link](diagram/cs151classdiagram.png)   | 283   |  301   | 283   |
