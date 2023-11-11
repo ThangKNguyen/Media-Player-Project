@@ -1,13 +1,16 @@
 package edu.sjsu.cs.mediaplayer;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.media.Media;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -52,6 +55,7 @@ public class FileSelectController implements Initializable {
         onYesSubtitles();
         onNoSubtitles();
         onSubtitleFile();
+        onWatchVideo();
     }
 
     private void onSelectMediaFile() {
@@ -91,6 +95,21 @@ public class FileSelectController implements Initializable {
             fileChooser.getExtensionFilters().add(filter);
             File file = fileChooser.showOpenDialog(null);
             srtFile = file.toURI().toString();
+        });
+    }
+
+    private void onWatchVideo() { // what happens when the user clicks the watch video button
+        watchVideoButton.setOnAction(event -> {
+            // load the FXML file of the Media Player
+            FXMLLoader fxmlLoader = new FXMLLoader(MediaPlayerApp.class.getResource("MediaPlayer.fxml"));
+            // get the parent stage of the current scene
+            Stage stage = (Stage) watchVideoButton.getScene().getWindow();
+            try {
+                // set the scene of the parent stage to the media player
+                stage.setScene(new Scene(fxmlLoader.load(), 600, 600));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         });
     }
 }
