@@ -92,10 +92,8 @@ public class MediaPlayerController implements Initializable {
     @FXML
     private Button exitButton;
 
-    private Scene fileSelectScene;
     private MediaPlayer mediaPlayer;
-    private Media media;
-    private String mediaPath;
+    private String srtFilePath;
     private boolean endOfVideo;
     private boolean isPlaying;
     private boolean isMuted;
@@ -114,6 +112,7 @@ public class MediaPlayerController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // put the ImageViews to the respective buttons
         setImages();
         playPauseReplayButton.setGraphic(pause);
         skipForwardButton.setGraphic(skipForward);
@@ -123,10 +122,11 @@ public class MediaPlayerController implements Initializable {
         fullscreenButton.setGraphic(fullscreen);
         subtitleButton.setGraphic(subtitles);
         exitButton.setGraphic(exit);
+
         onExit();
     }
 
-    private void setImages() {
+    private void setImages() { // use the images and put them on to their respective ImageView
         final int IMAGE_SIZE = 25;
 
         Image playImage = new Image(new File("src/main/resources/images/play.png").toURI().toString());
@@ -198,5 +198,16 @@ public class MediaPlayerController implements Initializable {
                 throw new RuntimeException(e);
             }
         });
+    }
+
+    public void setupMedia(String mediaFilePath) { // use the video's file path and display it
+        Media media = new Media(mediaFilePath);
+        mediaPlayer = new MediaPlayer(media);
+        mediaView.setMediaPlayer(mediaPlayer);
+    }
+
+    public void setupMediaAndSubtitles(String mediaFilePath, String srtFilePath) {
+        setupMedia(mediaFilePath);
+        // will create a subtitle setup later
     }
 }

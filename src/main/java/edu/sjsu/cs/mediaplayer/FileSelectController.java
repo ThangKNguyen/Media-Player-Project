@@ -3,6 +3,7 @@ package edu.sjsu.cs.mediaplayer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.media.Media;
@@ -39,10 +40,10 @@ public class FileSelectController implements Initializable {
     @FXML
     private Button watchVideoButton;
 
-    private String filePath;
-    private Media media;
-    private String srtFile;
-    private Scene mediaPlayerScene;
+    private String mediaFilePath;
+    private String srtFilePath;
+    private boolean subtitlesOn = false;
+    private Parent root;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -61,15 +62,16 @@ public class FileSelectController implements Initializable {
     private void onSelectMediaFile() {
         mediaFileButton.setOnAction(event -> {
             FileChooser fileChooser = new FileChooser();
+            // restrict the file type to .srt
             FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Select a file (*.mp4)", "*.mp4");
             fileChooser.getExtensionFilters().add(filter);
             File file = fileChooser.showOpenDialog(null);
-            filePath = file.toURI().toString();
-            if (filePath != null) {
-                mediaFileLabel.setText(filePath);
+            mediaFilePath = file.toURI().toString();
+            // show the mp4 file to the user
+            if (mediaFilePath != null) {
+                mediaFileLabel.setText(mediaFilePath);
                 mediaFileLabel.setVisible(true);
                 subtitleButton.setVisible(true);
-                media = new Media(filePath);
                 watchVideoButton.setVisible(true);
             }
         });
@@ -77,24 +79,32 @@ public class FileSelectController implements Initializable {
 
     private void onYesSubtitles() {
         yesSubtitles.setOnAction(event -> {
+            subtitlesOn = true;
             subtitleFileButton.setVisible(true);
         });
     }
 
     private void onNoSubtitles() {
         noSubtitles.setOnAction(event -> {
+            subtitlesOn = false;
             subtitleFileButton.setVisible(false);
             subtitleFileLabel.setVisible(false);
         });
     }
 
-    private void onSubtitleFile() {
+    private void onSubtitleFile() { // set the functionality for the choose subtitle file button
         subtitleFileButton.setOnAction(event -> {
             FileChooser fileChooser = new FileChooser();
+            // restrict the file type to .srt
             FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Select a file (*.srt)", "*.srt");
             fileChooser.getExtensionFilters().add(filter);
             File file = fileChooser.showOpenDialog(null);
-            srtFile = file.toURI().toString();
+            srtFilePath = file.toURI().toString();
+            // show the srt file to the user
+            if (srtFilePath != null) {
+                subtitleFileLabel.setText(srtFilePath);
+                subtitleFileLabel.setVisible(true);
+            }
         });
     }
 
@@ -102,13 +112,29 @@ public class FileSelectController implements Initializable {
         watchVideoButton.setOnAction(event -> {
             // load the FXML file of the Media Player
             FXMLLoader fxmlLoader = new FXMLLoader(MediaPlayerApp.class.getResource("MediaPlayer.fxml"));
-            // get the parent stage of the current scene
-            Stage stage = (Stage) watchVideoButton.getScene().getWindow();
             try {
-                // set the scene of the parent stage to the media player
-                stage.setScene(new Scene(fxmlLoader.load(), 600, 600));
+                root = fxmlLoader.load();
             } catch (IOException e) {
                 throw new RuntimeException(e);
+            }
+
+            // create instance of MediaPlayerController so you can access the methods of the class
+            MediaPlayerController mediaPlayerController = fxmlLoader.getController();
+
+            // check whether user chooses subtitles on, but provides no srt file
+            if (subtitlesOn && srtFilePath == null) {
+                subtitleFileLabel.setText("Select a .srt file");
+                subtitleFileLabel.setVisible(true);
+            }
+            else {
+                if (mediaFilePath != null && !subtitlesOn) // no subtitles
+                    mediaPlayerController.setupMedia(mediaFilePath);
+                else if (mediaFilePath != null && srtFilePath != null && subtitlesOn) // yes subtitles
+                    mediaPlayerController.setupMediaAndSubtitles(mediaFilePath, srtFilePath);
+                // get the parent stage of the current scene
+                Stage stage = (Stage) watchVideoButton.getScene().getWindow();
+                // set the scene of the parent stage to the media player
+                stage.setScene(new Scene(root, 600, 600));
             }
         });
     }

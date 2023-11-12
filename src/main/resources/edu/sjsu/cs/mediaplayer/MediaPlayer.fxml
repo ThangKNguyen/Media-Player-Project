@@ -26,8 +26,8 @@
                   <Insets left="5.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="skipBackwardsButton" mnemonicParsing="false" />
-            <Button fx:id="skipForwardButton" mnemonicParsing="false" />
+            <Button fx:id="skipBackwardsButton" mnemonicParsing="false" style="-fx-cursor: hand;" />
+            <Button fx:id="skipForwardButton" mnemonicParsing="false" style="-fx-cursor: hand;" />
             <HBox fx:id="volumeHBox">
                <padding>
                   <Insets left="5.0" />
@@ -62,21 +62,21 @@
             </Label>
             <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
                <children>
-                  <Button fx:id="subtitleButton" mnemonicParsing="false" />
-                  <MenuButton fx:id="playbackSpeedMenuButton" mnemonicParsing="false">
+                  <Button fx:id="subtitleButton" mnemonicParsing="false" style="-fx-cursor: hand;" />
+                  <MenuButton fx:id="playbackSpeedMenuButton" mnemonicParsing="false" style="-fx-cursor: hand;">
                     <items>
-                      <MenuItem fx:id="oneFourthSpeed" mnemonicParsing="false" text="0.25" />
-                      <MenuItem fx:id="halfSpeed" mnemonicParsing="false" text="0.5" />
-                        <MenuItem fx:id="threeFourthSpeed" mnemonicParsing="false" text="0.75" />
-                        <MenuItem fx:id="oneSpeed" mnemonicParsing="false" text="1" />
-                        <MenuItem fx:id="one25Speed" mnemonicParsing="false" text="1.25" />
-                        <MenuItem fx:id="one50Speed" mnemonicParsing="false" text="1.50" />
-                        <MenuItem fx:id="one75Speed" mnemonicParsing="false" text="1.75" />
-                        <MenuItem fx:id="doubleSpeed" mnemonicParsing="false" text="2" />
+                      <MenuItem fx:id="oneFourthSpeed" mnemonicParsing="false" style="-fx-cursor: hand;" text="0.25" />
+                      <MenuItem fx:id="halfSpeed" mnemonicParsing="false" style="-fx-cursor: hand;" text="0.5" />
+                        <MenuItem fx:id="threeFourthSpeed" mnemonicParsing="false" style="-fx-cursor: hand;" text="0.75" />
+                        <MenuItem fx:id="oneSpeed" mnemonicParsing="false" style="-fx-cursor: hand;" text="1" />
+                        <MenuItem fx:id="one25Speed" mnemonicParsing="false" style="-fx-cursor: hand;" text="1.25" />
+                        <MenuItem fx:id="one50Speed" mnemonicParsing="false" style="-fx-cursor: hand;" text="1.50" />
+                        <MenuItem fx:id="one75Speed" mnemonicParsing="false" style="-fx-cursor: hand;" text="1.75" />
+                        <MenuItem fx:id="doubleSpeed" mnemonicParsing="false" style="-fx-cursor: hand;" text="2" />
                     </items>
                   </MenuButton>
-                  <Button fx:id="fullscreenButton" mnemonicParsing="false" />
-                  <Button fx:id="exitButton" mnemonicParsing="false" />
+                  <Button fx:id="fullscreenButton" mnemonicParsing="false" style="-fx-cursor: hand;" />
+                  <Button fx:id="exitButton" mnemonicParsing="false" style="-fx-cursor: hand;" />
                </children>
                <padding>
                   <Insets right="5.0" />

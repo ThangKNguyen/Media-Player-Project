@@ -8,16 +8,16 @@
 
 <VBox fx:id="parentVBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.sjsu.cs.mediaplayer.FileSelectController">
    <children>
-      <Button fx:id="mediaFileButton" mnemonicParsing="false" prefWidth="150.0" text="Choose media file" />
+      <Button fx:id="mediaFileButton" mnemonicParsing="false" prefWidth="150.0" style="-fx-cursor: hand;" text="Choose media file" />
       <Label fx:id="mediaFileLabel" text="Label" />
-      <MenuButton fx:id="subtitleButton" alignment="CENTER" mnemonicParsing="false" prefWidth="150.0" text="Subtitle support?">
+      <MenuButton fx:id="subtitleButton" alignment="CENTER" mnemonicParsing="false" prefWidth="150.0" style="-fx-cursor: hand;" text="Subtitle support?">
         <items>
-          <MenuItem fx:id="yesSubtitles" mnemonicParsing="false" text="Yes" />
-          <MenuItem fx:id="noSubtitles" mnemonicParsing="false" text="No" />
+          <MenuItem fx:id="yesSubtitles" mnemonicParsing="false" style="-fx-cursor: hand;" text="Yes" />
+          <MenuItem fx:id="noSubtitles" mnemonicParsing="false" style="-fx-cursor: hand;" text="No" />
         </items>
       </MenuButton>
-      <Button fx:id="subtitleFileButton" mnemonicParsing="false" prefWidth="150.0" text="Choose subtitle file" />
+      <Button fx:id="subtitleFileButton" mnemonicParsing="false" prefWidth="150.0" style="-fx-cursor: hand;" text="Choose subtitle file" />
       <Label fx:id="subtitleFileLabel" text="Label" />
-      <Button fx:id="watchVideoButton" mnemonicParsing="false" prefWidth="150.0" text="Watch video!" />
+      <Button fx:id="watchVideoButton" mnemonicParsing="false" prefWidth="150.0" style="-fx-cursor: hand;" text="Watch video!" />
    </children>
 </VBox>
