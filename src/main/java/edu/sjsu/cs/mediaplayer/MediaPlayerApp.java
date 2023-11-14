@@ -9,7 +9,7 @@ public class MediaPlayerApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(MediaPlayerApp.class.getResource("FileSelect.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 600);
+        Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Media Player");
         stage.setScene(scene);
         stage.show();

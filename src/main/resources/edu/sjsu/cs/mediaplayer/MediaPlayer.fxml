@@ -6,83 +6,100 @@
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="parentVBox" alignment="CENTER" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.sjsu.cs.mediaplayer.MediaPlayerController">
+<VBox fx:id="parentVBox" alignment="CENTER" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.sjsu.cs.mediaplayer.MediaPlayerController">
    <children>
-      <MediaView fx:id="mediaView" fitHeight="200.0" fitWidth="200.0" />
-      <Slider fx:id="timeSlider" style="-fx-cursor: hand;">
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
-      </Slider>
-      <HBox fx:id="controlsHBox" alignment="CENTER_LEFT">
-         <children>
-            <Button fx:id="playPauseReplayButton" mnemonicParsing="false" style="-fx-cursor: hand;">
-               <HBox.margin>
-                  <Insets left="5.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="skipBackwardsButton" mnemonicParsing="false" style="-fx-cursor: hand;" />
-            <Button fx:id="skipForwardButton" mnemonicParsing="false" style="-fx-cursor: hand;" />
-            <HBox fx:id="volumeHBox">
-               <padding>
-                  <Insets left="5.0" />
-               </padding>
+      <BorderPane prefHeight="400.0" prefWidth="600.0">
+         <bottom>
+            <VBox fx:id="buttonBarVBox" alignment="BOTTOM_CENTER" prefHeight="40.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label fx:id="volumeLabel" style="-fx-cursor: hand;">
+                  <Slider fx:id="timeSlider" style="-fx-cursor: hand;">
                      <padding>
-                        <Insets left="5.0" right="5.0" top="3.0" />
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
-                  </Label>
-                  <Slider fx:id="volumeSlider" style="-fx-cursor: hand;">
-                     <padding>
-                        <Insets top="7.0" />
-                     </padding></Slider>
+                  </Slider>
+                  <HBox fx:id="controlsHBox" alignment="CENTER_LEFT" prefHeight="40.0">
+                     <children>
+                        <Button fx:id="playPauseReplayButton" mnemonicParsing="false" style="-fx-cursor: hand;">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="skipBackwardsButton" mnemonicParsing="false" style="-fx-cursor: hand;" />
+                        <Button fx:id="skipForwardButton" mnemonicParsing="false" style="-fx-cursor: hand;" />
+                        <HBox fx:id="volumeHBox">
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding>
+                           <children>
+                              <Label fx:id="volumeLabel" style="-fx-cursor: hand;">
+                                 <padding>
+                                    <Insets left="5.0" right="5.0" top="3.0" />
+                                 </padding>
+                              </Label>
+                              <Slider fx:id="volumeSlider" style="-fx-cursor: hand;">
+                                 <padding>
+                                    <Insets top="7.0" />
+                                 </padding>
+                              </Slider>
+                           </children>
+                        </HBox>
+                        <Label fx:id="currentTimeLabel">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="totalLengthLabel">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets right="5.0" />
+                           </padding>
+                        </Label>
+                        <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Button fx:id="subtitleButton" mnemonicParsing="false" style="-fx-cursor: hand;" />
+                              <MenuButton fx:id="playbackSpeedMenuButton" mnemonicParsing="false" style="-fx-cursor: hand;">
+                                <items>
+                                  <MenuItem fx:id="oneFourthSpeed" mnemonicParsing="false" style="-fx-cursor: hand;" text="0.25" />
+                                  <MenuItem fx:id="halfSpeed" mnemonicParsing="false" style="-fx-cursor: hand;" text="0.5" />
+                                    <MenuItem fx:id="threeFourthSpeed" mnemonicParsing="false" style="-fx-cursor: hand;" text="0.75" />
+                                    <MenuItem fx:id="oneSpeed" mnemonicParsing="false" style="-fx-cursor: hand;" text="1" />
+                                    <MenuItem fx:id="one25Speed" mnemonicParsing="false" style="-fx-cursor: hand;" text="1.25" />
+                                    <MenuItem fx:id="one50Speed" mnemonicParsing="false" style="-fx-cursor: hand;" text="1.50" />
+                                    <MenuItem fx:id="one75Speed" mnemonicParsing="false" style="-fx-cursor: hand;" text="1.75" />
+                                    <MenuItem fx:id="doubleSpeed" mnemonicParsing="false" style="-fx-cursor: hand;" text="2" />
+                                </items>
+                              </MenuButton>
+                              <Button fx:id="fullscreenButton" mnemonicParsing="false" style="-fx-cursor: hand;" />
+                              <Button fx:id="exitButton" mnemonicParsing="false" style="-fx-cursor: hand;" />
+                           </children>
+                           <padding>
+                              <Insets right="5.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
-            <Label fx:id="currentTimeLabel">
-               <font>
-                  <Font size="18.0" />
-               </font>
-               <padding>
-                  <Insets left="5.0" />
-               </padding>
-            </Label>
-            <Label fx:id="totalLengthLabel">
-               <font>
-                  <Font size="18.0" />
-               </font>
-               <padding>
-                  <Insets right="5.0" />
-               </padding>
-            </Label>
-            <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+            </VBox>
+         </bottom>
+         <center>
+            <StackPane BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="subtitleButton" mnemonicParsing="false" style="-fx-cursor: hand;" />
-                  <MenuButton fx:id="playbackSpeedMenuButton" mnemonicParsing="false" style="-fx-cursor: hand;">
-                    <items>
-                      <MenuItem fx:id="oneFourthSpeed" mnemonicParsing="false" style="-fx-cursor: hand;" text="0.25" />
-                      <MenuItem fx:id="halfSpeed" mnemonicParsing="false" style="-fx-cursor: hand;" text="0.5" />
-                        <MenuItem fx:id="threeFourthSpeed" mnemonicParsing="false" style="-fx-cursor: hand;" text="0.75" />
-                        <MenuItem fx:id="oneSpeed" mnemonicParsing="false" style="-fx-cursor: hand;" text="1" />
-                        <MenuItem fx:id="one25Speed" mnemonicParsing="false" style="-fx-cursor: hand;" text="1.25" />
-                        <MenuItem fx:id="one50Speed" mnemonicParsing="false" style="-fx-cursor: hand;" text="1.50" />
-                        <MenuItem fx:id="one75Speed" mnemonicParsing="false" style="-fx-cursor: hand;" text="1.75" />
-                        <MenuItem fx:id="doubleSpeed" mnemonicParsing="false" style="-fx-cursor: hand;" text="2" />
-                    </items>
-                  </MenuButton>
-                  <Button fx:id="fullscreenButton" mnemonicParsing="false" style="-fx-cursor: hand;" />
-                  <Button fx:id="exitButton" mnemonicParsing="false" style="-fx-cursor: hand;" />
+                  <MediaView fx:id="mediaView" fitHeight="200.0" fitWidth="200.0" />
                </children>
-               <padding>
-                  <Insets right="5.0" />
-               </padding>
-            </HBox>
-         </children>
-      </HBox>
+            </StackPane>
+         </center>
+      </BorderPane>
    </children>
 </VBox>

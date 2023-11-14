@@ -142,14 +142,14 @@ public class FileSelectController implements Initializable {
                 // get the parent stage of the current scene
                 Stage stage = (Stage) watchVideoButton.getScene().getWindow();
                 // set the scene of the parent stage to the media player
-                stage.setScene(new Scene(root, 600, 600));
+                stage.setScene(new Scene(root));
             }
             else if (subtitlesOn && mediaFilePath!= null && srtFilePath != null) {
                 mediaPlayerController.setupMediaAndSubtitles(mediaFilePath, srtFilePath);
                 // get the parent stage of the current scene
                 Stage stage = (Stage) watchVideoButton.getScene().getWindow();
                 // set the scene of the parent stage to the media player
-                stage.setScene(new Scene(root, 600, 600));
+                stage.setScene(new Scene(root));
             }
         });
     }

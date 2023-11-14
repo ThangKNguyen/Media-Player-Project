@@ -1,5 +1,7 @@
 package edu.sjsu.cs.mediaplayer;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -241,7 +243,7 @@ public class MediaPlayerController implements Initializable {
             Stage stage = (Stage) exit.getScene().getWindow();
             try {
                 // set the scene of the parent stage to the select file page
-                stage.setScene(new Scene(fxmlLoader.load(), 600, 600));
+                stage.setScene(new Scene(fxmlLoader.load()));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -252,6 +254,10 @@ public class MediaPlayerController implements Initializable {
         Media media = new Media(mediaFilePath);
         mediaPlayer = new MediaPlayer(media);
         mediaView.setMediaPlayer(mediaPlayer);
+        DoubleProperty width = mediaView.fitWidthProperty();
+        DoubleProperty height = mediaView.fitHeightProperty();
+        width.bind(Bindings.selectDouble(mediaView.sceneProperty(), "width"));
+        height.bind(Bindings.selectDouble(mediaView.sceneProperty(), "height"));
     }
 
     public void setupMediaAndSubtitles(String mediaFilePath, String srtFilePath) {
