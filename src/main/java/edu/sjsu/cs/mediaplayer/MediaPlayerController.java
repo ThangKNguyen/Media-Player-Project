@@ -1,5 +1,9 @@
 package edu.sjsu.cs.mediaplayer;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,6 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.util.Duration;
 
 public class MediaPlayerController implements Initializable {
     @FXML
@@ -114,7 +119,7 @@ public class MediaPlayerController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // put the ImageViews to the respective buttons
         setImages();
-        playPauseReplayButton.setGraphic(pause);
+        playPauseReplayButton.setGraphic(play);
         skipForwardButton.setGraphic(skipForward);
         skipBackwardsButton.setGraphic(skipBackward);
         volumeLabel.setGraphic(volume);
@@ -122,6 +127,49 @@ public class MediaPlayerController implements Initializable {
         fullscreenButton.setGraphic(fullscreen);
         subtitleButton.setGraphic(subtitles);
         exitButton.setGraphic(exit);
+
+        //Testing play, pause, replay button
+        setupMedia(FileSelectController.mediaFilePath);
+        playPauseReplayButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Button buttonPlay = (Button) actionEvent.getSource();
+                if (endOfVideo) {
+                    timeSlider.setValue(0);
+                    endOfVideo = false;
+                    isPlaying = true;
+                }
+                if (isPlaying) {
+                    buttonPlay.setGraphic(play);
+                    mediaPlayer.pause();
+                    isPlaying = false;
+                } else {
+                    buttonPlay.setGraphic(pause);
+                    mediaPlayer.play();
+                    isPlaying = true;
+                }
+            }
+        });
+
+        //Added Slider functionality
+        timeSlider.valueChangingProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean wasChanging, Boolean isChanging) {
+                if (!isChanging) {
+                    mediaPlayer.seek(Duration.seconds(timeSlider.getValue()));
+                }
+            }
+        });
+        timeSlider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number prevValue, Number newValue) {
+                double currentTime = mediaPlayer.getCurrentTime().toSeconds();
+                if (Math.abs(currentTime - newValue.doubleValue()) > 0.5) {
+                    mediaPlayer.seek(Duration.seconds(newValue.doubleValue()));
+                }
+            }
+        });
+
 
         onExit();
     }

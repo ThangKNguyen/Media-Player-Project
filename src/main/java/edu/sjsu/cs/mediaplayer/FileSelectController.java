@@ -42,7 +42,8 @@ public class FileSelectController implements Initializable {
     @FXML
     private Button watchVideoButton;
 
-    private String mediaFilePath;
+    //Changed from private to protected static, for mediaPlayerController to access
+    protected static String mediaFilePath;
     private String srtFilePath;
     private boolean subtitlesOn = false;
     private Parent root;
