@@ -13,6 +13,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
@@ -130,6 +132,7 @@ public class MediaPlayerController implements Initializable {
         subtitleButton.setGraphic(subtitles);
         exitButton.setGraphic(exit);
 
+        onFullscreen();
         //Testing play, pause, replay button
         setupMedia(FileSelectController.mediaFilePath);
         playPauseReplayButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -169,6 +172,14 @@ public class MediaPlayerController implements Initializable {
                 if (Math.abs(currentTime - newValue.doubleValue()) > 0.5) {
                     mediaPlayer.seek(Duration.seconds(newValue.doubleValue()));
                 }
+            }
+        });
+
+        parentVBox.sceneProperty().addListener(new ChangeListener<Scene>() {
+            @Override
+            public void changed(ObservableValue<? extends Scene> observableValue, Scene oldScene, Scene newScene) {
+                if (oldScene == null && newScene != null)
+                    mediaView.fitHeightProperty().bind(newScene.heightProperty().subtract(controlsHBox.heightProperty().add(20)));
             }
         });
 
@@ -243,7 +254,7 @@ public class MediaPlayerController implements Initializable {
             Stage stage = (Stage) exit.getScene().getWindow();
             try {
                 // set the scene of the parent stage to the select file page
-                stage.setScene(new Scene(fxmlLoader.load()));
+                stage.setScene(new Scene(fxmlLoader.load(), 600, 600));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -254,10 +265,6 @@ public class MediaPlayerController implements Initializable {
         Media media = new Media(mediaFilePath);
         mediaPlayer = new MediaPlayer(media);
         mediaView.setMediaPlayer(mediaPlayer);
-        DoubleProperty width = mediaView.fitWidthProperty();
-        DoubleProperty height = mediaView.fitHeightProperty();
-        width.bind(Bindings.selectDouble(mediaView.sceneProperty(), "width"));
-        height.bind(Bindings.selectDouble(mediaView.sceneProperty(), "height"));
     }
 
     public void setupMediaAndSubtitles(String mediaFilePath, String srtFilePath) {
@@ -269,5 +276,20 @@ public class MediaPlayerController implements Initializable {
         else {
             subtitleButton.setVisible(true);
         }
+    }
+
+    private void onFullscreen() {
+        fullscreenButton.setOnAction(event -> {
+            // get the parent stage
+            Stage parentStage = (Stage) fullscreenButton.getScene().getWindow();
+            // if the stage is already fullscreen, exit fullscreen
+            if (parentStage.isFullScreen()) {
+                parentStage.setFullScreen(false);
+            }
+            // otherwise enter fullscreen
+            else {
+                parentStage.setFullScreen(true);
+            }
+        });
     }
 }
