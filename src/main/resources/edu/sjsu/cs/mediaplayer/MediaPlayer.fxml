@@ -13,13 +13,13 @@
 
 <VBox fx:id="parentVBox" alignment="CENTER" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.sjsu.cs.mediaplayer.MediaPlayerController">
    <children>
-      <MediaView fx:id="mediaView" fitHeight="200.0" fitWidth="200.0" />
+      <MediaView fx:id="mediaView" />
       <Slider fx:id="timeSlider" style="-fx-cursor: hand;">
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </Slider>
-      <HBox fx:id="controlsHBox" alignment="CENTER_LEFT">
+      <HBox fx:id="controlsHBox" alignment="CENTER_LEFT" prefHeight="20.0">
          <children>
             <Button fx:id="playPauseReplayButton" mnemonicParsing="false" style="-fx-cursor: hand;">
                <HBox.margin>

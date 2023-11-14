@@ -175,10 +175,12 @@ public class MediaPlayerController implements Initializable {
             }
         });
 
+        // bind the height of media view to height of the scene
         parentVBox.sceneProperty().addListener(new ChangeListener<Scene>() {
             @Override
             public void changed(ObservableValue<? extends Scene> observableValue, Scene oldScene, Scene newScene) {
                 if (oldScene == null && newScene != null)
+                    // the height of the media view needs to be the height of the scene minus the height of the control hbox
                     mediaView.fitHeightProperty().bind(newScene.heightProperty().subtract(controlsHBox.heightProperty().add(20)));
             }
         });
@@ -254,7 +256,7 @@ public class MediaPlayerController implements Initializable {
             Stage stage = (Stage) exit.getScene().getWindow();
             try {
                 // set the scene of the parent stage to the select file page
-                stage.setScene(new Scene(fxmlLoader.load(), 600, 600));
+                stage.setScene(new Scene(fxmlLoader.load(), 800, 800));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
