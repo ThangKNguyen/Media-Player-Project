@@ -262,6 +262,12 @@ public class MediaPlayerController implements Initializable {
 
     public void setupMediaAndSubtitles(String mediaFilePath, String srtFilePath) {
         setupMedia(mediaFilePath);
-        // will create a subtitle setup later
+        if (srtFilePath == null) {
+            subtitleButton.setVisible(false);
+        }
+        // will setup subtitles later
+        else {
+            subtitleButton.setVisible(true);
+        }
     }
 }
