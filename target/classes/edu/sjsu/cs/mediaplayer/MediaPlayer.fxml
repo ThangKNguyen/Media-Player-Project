@@ -64,7 +64,7 @@
             <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
                <children>
                   <Button fx:id="subtitleButton" mnemonicParsing="false" style="-fx-cursor: hand;" />
-                  <MenuButton fx:id="playbackSpeedMenuButton" mnemonicParsing="false" style="-fx-cursor: hand;">
+                  <MenuButton fx:id="playbackSpeedMenuButton" mnemonicParsing="false" style="-fx-cursor: hand;" text="1x">
                     <items>
                       <MenuItem fx:id="oneFourthSpeed" mnemonicParsing="false" style="-fx-cursor: hand;" text="0.25" />
                       <MenuItem fx:id="halfSpeed" mnemonicParsing="false" style="-fx-cursor: hand;" text="0.5" />

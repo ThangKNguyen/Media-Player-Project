@@ -123,7 +123,7 @@ public class MediaPlayerController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // put the ImageViews to the respective buttons
         setImages();
-        playPauseReplayButton.setGraphic(play);
+        playPauseReplayButton.setGraphic(pause);
         skipForwardButton.setGraphic(skipForward);
         skipBackwardsButton.setGraphic(skipBackward);
         volumeLabel.setGraphic(volume);
@@ -133,6 +133,7 @@ public class MediaPlayerController implements Initializable {
         exitButton.setGraphic(exit);
 
         onFullscreen();
+        setPlaybackSpeeds();
         //Testing play, pause, replay button
         setupMedia(FileSelectController.mediaFilePath);
         playPauseReplayButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -267,6 +268,8 @@ public class MediaPlayerController implements Initializable {
         Media media = new Media(mediaFilePath);
         mediaPlayer = new MediaPlayer(media);
         mediaView.setMediaPlayer(mediaPlayer);
+        mediaPlayer.play();
+        isPlaying = true;
     }
 
     public void setupMediaAndSubtitles(String mediaFilePath, String srtFilePath) {
@@ -292,6 +295,66 @@ public class MediaPlayerController implements Initializable {
             else {
                 parentStage.setFullScreen(true);
             }
+        });
+    }
+
+    private void setPlaybackSpeeds() {
+        onOneFourthSpeed();
+        onHalfSpeed();
+        onThreeFourthSpeed();
+        onOneSpeed();
+        onOne25Speed();
+        onOne50Speed();
+        onOne75Speed();
+        onDoubleSpeed();
+    }
+
+    private void onOneFourthSpeed() {
+        oneFourthSpeed.setOnAction(event -> {
+            mediaPlayer.setRate(0.25);
+            playbackSpeedMenuButton.setText("0.25x");
+        });
+    }
+    private void onHalfSpeed() {
+        halfSpeed.setOnAction(event -> {
+            mediaPlayer.setRate(0.50);
+            playbackSpeedMenuButton.setText("0.50x");
+        });
+    }
+    private void onThreeFourthSpeed() {
+        threeFourthSpeed.setOnAction(event -> {
+            mediaPlayer.setRate(0.75);
+            playbackSpeedMenuButton.setText("0.75x");
+        });
+    }
+    private void onOneSpeed() {
+        oneSpeed.setOnAction(event -> {
+            mediaPlayer.setRate(1);
+            playbackSpeedMenuButton.setText("1x");
+        });
+    }
+    private void onOne25Speed() {
+        one25Speed.setOnAction(event -> {
+            mediaPlayer.setRate(1.25);
+            playbackSpeedMenuButton.setText("1.25x");
+        });
+    }
+    private void onOne50Speed() {
+        one50Speed.setOnAction(event -> {
+            mediaPlayer.setRate(1.50);
+            playbackSpeedMenuButton.setText("1.50x");
+        });
+    }
+    private void onOne75Speed() {
+        one75Speed.setOnAction(event -> {
+            mediaPlayer.setRate(1.75);
+            playbackSpeedMenuButton.setText("1.75x");
+        });
+    }
+    private void onDoubleSpeed() {
+        doubleSpeed.setOnAction(event -> {
+            mediaPlayer.setRate(2);
+            playbackSpeedMenuButton.setText("2x");
         });
     }
 }
