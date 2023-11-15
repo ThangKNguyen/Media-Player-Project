@@ -250,6 +250,7 @@ public class MediaPlayerController implements Initializable {
     }
 
     private void onExit() { // what happens when the user clicks the exit button
+        mediaPlayer.stop();
         exitButton.setOnAction(event -> {
             // load the FXML file of the select file page
             FXMLLoader fxmlLoader = new FXMLLoader(MediaPlayerApp.class.getResource("FileSelect.fxml"));
@@ -311,50 +312,47 @@ public class MediaPlayerController implements Initializable {
 
     private void onOneFourthSpeed() {
         oneFourthSpeed.setOnAction(event -> {
-            mediaPlayer.setRate(0.25);
-            playbackSpeedMenuButton.setText("0.25x");
+            setMediaPlayerRate(0.25);
         });
     }
     private void onHalfSpeed() {
         halfSpeed.setOnAction(event -> {
-            mediaPlayer.setRate(0.50);
-            playbackSpeedMenuButton.setText("0.50x");
+            setMediaPlayerRate(0.50);
         });
     }
     private void onThreeFourthSpeed() {
         threeFourthSpeed.setOnAction(event -> {
-            mediaPlayer.setRate(0.75);
-            playbackSpeedMenuButton.setText("0.75x");
+            setMediaPlayerRate(0.75);
         });
     }
     private void onOneSpeed() {
         oneSpeed.setOnAction(event -> {
-            mediaPlayer.setRate(1);
-            playbackSpeedMenuButton.setText("1x");
+            setMediaPlayerRate(1);
         });
     }
     private void onOne25Speed() {
         one25Speed.setOnAction(event -> {
-            mediaPlayer.setRate(1.25);
-            playbackSpeedMenuButton.setText("1.25x");
+            setMediaPlayerRate(1.25);
         });
     }
     private void onOne50Speed() {
         one50Speed.setOnAction(event -> {
-            mediaPlayer.setRate(1.50);
-            playbackSpeedMenuButton.setText("1.50x");
+            setMediaPlayerRate(1.50);
         });
     }
     private void onOne75Speed() {
         one75Speed.setOnAction(event -> {
-            mediaPlayer.setRate(1.75);
-            playbackSpeedMenuButton.setText("1.75x");
+            setMediaPlayerRate(1.75);
         });
     }
     private void onDoubleSpeed() {
         doubleSpeed.setOnAction(event -> {
-            mediaPlayer.setRate(2);
-            playbackSpeedMenuButton.setText("2x");
+            setMediaPlayerRate(2);
         });
+    }
+
+    private void setMediaPlayerRate(double rate) {
+        mediaPlayer.setRate(rate);
+        playbackSpeedMenuButton.setText(rate + "x");
     }
 }
