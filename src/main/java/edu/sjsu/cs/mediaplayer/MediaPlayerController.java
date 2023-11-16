@@ -108,6 +108,7 @@ public class MediaPlayerController implements Initializable {
     private boolean endOfVideo;
     private boolean isPlaying;
     private boolean isMuted;
+    private double lastVolumeLevel;
 
     private ImageView play;
     private ImageView pause;
@@ -136,6 +137,7 @@ public class MediaPlayerController implements Initializable {
 
         onFullscreen();
         setPlaybackSpeeds();
+        onVolumeLabel();
         //Testing play, pause, replay button
         setupMedia(FileSelectController.mediaFilePath);
         playPauseReplayButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -368,5 +370,21 @@ public class MediaPlayerController implements Initializable {
     private void setMediaPlayerRate(double rate) {
         mediaPlayer.setRate(rate);
         playbackSpeedMenuButton.setText(rate + "x");
+    }
+
+    private void onVolumeLabel() {
+        volumeLabel.setOnMouseClicked(event -> {
+            if (mediaPlayer.isMute()) {
+                mediaPlayer.setMute(false);
+                volumeLabel.setGraphic(volume);
+                volumeSlider.setValue(lastVolumeLevel);
+            }
+            else {
+                mediaPlayer.setMute(true);
+                volumeLabel.setGraphic(muted);
+                lastVolumeLevel = volumeSlider.getValue();
+                volumeSlider.setValue(0);
+            }
+        });
     }
 }
