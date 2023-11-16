@@ -161,6 +161,19 @@ public class MediaPlayerController implements Initializable {
             }
         });
 
+        //skips forward 10 secs when pressed
+
+        skipForwardButton.setOnAction(event -> {
+            Duration currentTime = mediaPlayer.getCurrentTime();
+            mediaPlayer.seek(currentTime.add(Duration.seconds(10)));
+        });
+
+        //skips backward 10 secs when pressed
+        skipBackwardsButton.setOnAction(event -> {
+            Duration currentTime = mediaPlayer.getCurrentTime();
+            mediaPlayer.seek(currentTime.subtract(Duration.seconds(10)));
+        });
+
         //sets the default volume to 100
         volumeSlider.setValue(mediaPlayer.getVolume()*100);
 
@@ -169,6 +182,14 @@ public class MediaPlayerController implements Initializable {
         volumeSlider.valueProperty().addListener(new InvalidationListener() {
             public void invalidated(Observable observable) {
                 mediaPlayer.setVolume(volumeSlider.getValue()/100);
+
+                if(mediaPlayer.getVolume() !=0.0){
+                    volumeLabel.setGraphic(volume);
+                    mediaPlayer.setMute(false);
+                } else{
+                    volumeLabel.setGraphic(muted);
+                    mediaPlayer.setMute(true);
+                }
 
             }
         });
