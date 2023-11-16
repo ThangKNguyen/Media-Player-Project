@@ -1,5 +1,7 @@
 package edu.sjsu.cs.mediaplayer;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.value.ChangeListener;
@@ -154,6 +156,18 @@ public class MediaPlayerController implements Initializable {
                     mediaPlayer.play();
                     isPlaying = true;
                 }
+            }
+        });
+
+        //sets the default volume to 100
+        volumeSlider.setValue(mediaPlayer.getVolume()*100);
+
+        //allows users to adjust volume with volume slider
+        //notes: should change icon to a muted volume image when volume == 0
+        volumeSlider.valueProperty().addListener(new InvalidationListener() {
+            public void invalidated(Observable observable) {
+                mediaPlayer.setVolume(volumeSlider.getValue()/100);
+
             }
         });
 
