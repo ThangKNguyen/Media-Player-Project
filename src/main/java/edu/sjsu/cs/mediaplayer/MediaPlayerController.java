@@ -28,6 +28,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.Callable;
+
 import javafx.util.Duration;
 
 public class MediaPlayerController implements Initializable {
@@ -147,7 +149,7 @@ public class MediaPlayerController implements Initializable {
                 if (endOfVideo) {
                     timeSlider.setValue(0);
                     endOfVideo = false;
-                    isPlaying = true;
+                    isPlaying = false;
                 }
                 if (isPlaying) {
                     buttonPlay.setGraphic(play);
@@ -308,6 +310,7 @@ public class MediaPlayerController implements Initializable {
         mediaView.setMediaPlayer(mediaPlayer);
         mediaPlayer.play();
         isPlaying = true;
+        bindTimeSliderAndCurrentTimeLabel();
     }
 
     public void setupMediaAndSubtitles(String mediaFilePath, String srtFilePath) {
@@ -407,5 +410,38 @@ public class MediaPlayerController implements Initializable {
                 volumeSlider.setValue(0);
             }
         });
+    }
+
+    private void bindTimeSliderAndCurrentTimeLabel() {
+        currentTimeLabel.textProperty().bind(Bindings.createStringBinding(new Callable<String>() {
+            @Override
+            public String call() throws Exception {
+                return formatTime(mediaPlayer.getCurrentTime()) + " / ";
+            }
+        }, mediaPlayer.currentTimeProperty()));
+    }
+
+    private String formatTime(Duration time) {
+        int hrs = (int) time.toHours();
+        int mins = (int) time.toMinutes();
+        int secs = (int) time.toSeconds();
+
+        // show only values less than 60 for seconds
+        if (secs > 59) {
+            secs %=  60;
+        }
+        if (mins > 59) {
+            mins %= 60;
+        }
+        if (hrs > 59) {
+            hrs %= 60;
+        }
+
+        // hours:mins:secs
+        if (hrs > 0)
+            return String.format("%d:%02d:%02d", hrs, mins, secs);
+        // mins:secs
+        else
+            return String.format("%02d:%02d", mins, secs);
     }
 }
