@@ -215,6 +215,14 @@ public class MediaPlayerController implements Initializable {
             }
         });
 
+        mediaPlayer.totalDurationProperty().addListener(new ChangeListener<Duration>() {
+            @Override
+            public void changed(ObservableValue<? extends Duration> observableValue, Duration oldDuration, Duration newDuration) {
+                timeSlider.setMax(newDuration.toSeconds());
+                totalLengthLabel.setText(formatTime(newDuration));
+            }
+        });
+
         // bind the height of media view to height of the scene
         parentVBox.sceneProperty().addListener(new ChangeListener<Scene>() {
             @Override
@@ -289,6 +297,8 @@ public class MediaPlayerController implements Initializable {
     }
 
     private void onExit() { // what happens when the user clicks the exit button
+        mediaPlayer.setRate(1);
+        mediaPlayer.setMute(true);
         mediaPlayer.stop();
         exitButton.setOnAction(event -> {
             // load the FXML file of the select file page
@@ -441,7 +451,9 @@ public class MediaPlayerController implements Initializable {
         if (hrs > 0)
             return String.format("%d:%02d:%02d", hrs, mins, secs);
         // mins:secs
-        else
+        else if (mins >= 10)
             return String.format("%02d:%02d", mins, secs);
+        else
+            return String.format("%2d:%02d", mins, secs);
     }
 }
