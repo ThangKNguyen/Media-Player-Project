@@ -3,6 +3,7 @@ package edu.sjsu.cs.mediaplayer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -49,17 +50,20 @@ public class FileSelectController implements Initializable {
     private void onSelectMediaFile() {
         mediaFileButton.setOnAction(event -> {
             FileChooser fileChooser = new FileChooser();
-            // restrict the file type to .srt
-            FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Select a file (*.mp4)", "*.mp4");
-            fileChooser.getExtensionFilters().add(filter);
-            File file = fileChooser.showOpenDialog(null);
-            mediaFilePath = file.toURI().toString();
+            // restrict the file type to .mp4
+            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Select a file (*.mp4)", "*.mp4"));
+            File selectedFile = fileChooser.showOpenDialog(((Node) event.getTarget()).getScene().getWindow());
             // show the mp4 file to the user
-            if (mediaFilePath != null) {
-                mediaFileLabel.setText(mediaFilePath);
+            if (selectedFile != null) {
+                mediaFilePath = selectedFile.toURI().toString();
+                mediaFileLabel.setText(selectedFile.getName());
                 mediaFileLabel.setVisible(true);
                 subtitleFileButton.setVisible(true);
                 watchVideoButton.setVisible(true);
+            }
+            else {
+                mediaFileLabel.setText("Please select a file");
+                mediaFileLabel.setVisible(true);
             }
         });
     }

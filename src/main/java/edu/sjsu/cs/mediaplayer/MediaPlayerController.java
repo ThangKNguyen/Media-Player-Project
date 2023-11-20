@@ -3,7 +3,6 @@ package edu.sjsu.cs.mediaplayer;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.DoubleProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -15,8 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
@@ -53,9 +50,6 @@ public class MediaPlayerController implements Initializable {
 
     @FXML
     private Button skipBackwardsButton;
-
-    @FXML
-    private HBox volumeHBox;
 
     @FXML
     private Label volumeLabel;
@@ -215,13 +209,6 @@ public class MediaPlayerController implements Initializable {
             }
         });
 
-        mediaPlayer.totalDurationProperty().addListener(new ChangeListener<Duration>() {
-            @Override
-            public void changed(ObservableValue<? extends Duration> observableValue, Duration oldDuration, Duration newDuration) {
-                timeSlider.setMax(newDuration.toSeconds());
-                totalLengthLabel.setText(formatTime(newDuration));
-            }
-        });
 
         // bind the height of media view to height of the scene
         parentVBox.sceneProperty().addListener(new ChangeListener<Scene>() {
@@ -232,7 +219,6 @@ public class MediaPlayerController implements Initializable {
                     mediaView.fitHeightProperty().bind(newScene.heightProperty().subtract(controlsHBox.heightProperty().add(20)));
             }
         });
-
 
         onExit();
     }
@@ -297,10 +283,8 @@ public class MediaPlayerController implements Initializable {
     }
 
     private void onExit() { // what happens when the user clicks the exit button
-        mediaPlayer.setRate(1);
-        mediaPlayer.setMute(true);
-        mediaPlayer.stop();
         exitButton.setOnAction(event -> {
+            mediaPlayer.stop();
             // load the FXML file of the select file page
             FXMLLoader fxmlLoader = new FXMLLoader(MediaPlayerApp.class.getResource("FileSelect.fxml"));
             // get the parent stage of the current scene
@@ -318,9 +302,20 @@ public class MediaPlayerController implements Initializable {
         Media media = new Media(mediaFilePath);
         mediaPlayer = new MediaPlayer(media);
         mediaView.setMediaPlayer(mediaPlayer);
-        mediaPlayer.play();
+        mediaPlayer.setAutoPlay(true);
         isPlaying = true;
         bindTimeSliderAndCurrentTimeLabel();
+        mediaPlayer.totalDurationProperty().addListener(new ChangeListener<Duration>() {
+            @Override
+            public void changed(ObservableValue<? extends Duration> observableValue, Duration oldDuration, Duration newDuration) {
+                timeSlider.setMax(newDuration.toSeconds());
+                totalLengthLabel.setText(formatTime(newDuration));
+            }
+        });
+
+        mediaPlayer.currentTimeProperty().addListener(((observableValue, oldValue, newValue) -> {
+            timeSlider.setValue(newValue.toSeconds());
+        }));
     }
 
     public void setupMediaAndSubtitles(String mediaFilePath, String srtFilePath) {
