@@ -36,6 +36,7 @@ public class FileSelectController implements Initializable {
     private String srtFilePath;
     private Parent root;
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         mediaFileLabel.setVisible(false);

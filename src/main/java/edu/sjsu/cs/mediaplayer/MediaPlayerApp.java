@@ -11,7 +11,12 @@ public class MediaPlayerApp extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(MediaPlayerApp.class.getResource("FileSelect.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 800);
         stage.setTitle("Media Player");
+
+        String css = this.getClass().getResource("styles.css").toExternalForm();
+        scene.getStylesheets().add(css);
+
         stage.setScene(scene);
+
         stage.show();
     }
 
