@@ -11,7 +11,7 @@
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="parentVBox" alignment="CENTER" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.sjsu.cs.mediaplayer.MediaPlayerController">
+<VBox fx:id="parentVBox" alignment="CENTER" styleClass="media_player_container" stylesheets="@MediaPlayer.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.sjsu.cs.mediaplayer.MediaPlayerController">
    <children>
       <MediaView fx:id="mediaView" />
       <Slider fx:id="timeSlider" style="-fx-cursor: hand;">
@@ -64,7 +64,7 @@
             <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
                <children>
                   <Button fx:id="subtitleButton" mnemonicParsing="false" style="-fx-cursor: hand;" />
-                  <MenuButton fx:id="playbackSpeedMenuButton" mnemonicParsing="false" style="-fx-cursor: hand;" text="1x">
+                  <MenuButton fx:id="playbackSpeedMenuButton" mnemonicParsing="false" style="-fx-cursor: hand;" styleClass="menu-item" text="1x">
                     <items>
                       <MenuItem fx:id="oneFourthSpeed" mnemonicParsing="false" style="-fx-cursor: hand;" text="0.25" />
                       <MenuItem fx:id="halfSpeed" mnemonicParsing="false" style="-fx-cursor: hand;" text="0.5" />

@@ -1,0 +1,48 @@
+.media_player_container {
+    -fx-background-color: #404040;
+}
+
+.media_player_container Text {
+    -fx-font-family: "Calibri";
+    -fx-text-fill: #0a0a0a;
+}
+
+.media_player_container Label {
+    -fx-font-family: "Calibri";
+    -fx-text-fill: #0a0a0a;
+}
+
+.media_player_container Button {
+    -fx-background-color: linear-gradient(to bottom left, #f78361, #f54b64);
+}
+
+.media_player_container Button:hover {
+    -fx-background-color: linear-gradient(to bottom left, #f2b29d, #c93c52);
+}
+
+.media_player_container MenuButton Text {
+    -fx-font-family: "Calibri";
+    -fx-font-size: 1.2em;
+    -fx-text-fill:  #0a0a0a;
+}
+
+/*.media_player_container MenuButton {
+    -fx-background-color: linear-gradient(to bottom left, #f78361, #f54b64);
+}
+
+.media_player_container MenuButton:hover {
+    -fx-background-color: linear-gradient(to bottom left, #f2b29d, #c93c52);
+} */
+
+.menu-item {
+    -fx-text-fill: black;
+    -fx-background-color: linear-gradient(to bottom left, #f78361, #f54b64);
+}
+.menu-item .label{
+    -fx-font-size: 1.2em;
+    -fx-text-fill: black;
+}
+
+.media_player_container Slider {
+    -fx-progress-color: linear-gradient(to bottom left, #f78361, #f54b64);
+}
