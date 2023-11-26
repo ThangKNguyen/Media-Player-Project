@@ -4,12 +4,12 @@
 
 .media_player_container Text {
     -fx-font-family: "Calibri";
-    -fx-text-fill: #0a0a0a;
+    -fx-text-fill: black;
 }
 
 .media_player_container Label {
     -fx-font-family: "Calibri";
-    -fx-text-fill: #0a0a0a;
+    -fx-text-fill: black;
 }
 
 .media_player_container Button {
@@ -23,7 +23,7 @@
 .media_player_container MenuButton Text {
     -fx-font-family: "Calibri";
     -fx-font-size: 1.2em;
-    -fx-text-fill:  #0a0a0a;
+    -fx-text-fill:  black;
 }
 
 /*.media_player_container MenuButton {
