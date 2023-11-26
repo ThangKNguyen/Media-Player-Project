@@ -210,6 +210,8 @@ public class MediaPlayerController implements Initializable {
                 if (Math.abs(currentTime - newValue.doubleValue()) > 0.5) {
                     mediaPlayer.seek(Duration.seconds(newValue.doubleValue()));
                 }
+                // check if at the end of video
+                matchEndOfVideo(currentTimeLabel.getText(), totalLengthLabel.getText());
             }
         });
 
@@ -224,6 +226,7 @@ public class MediaPlayerController implements Initializable {
             }
         });
 
+        // when the mouse enters the volume label's space, show the volume slider
         volumeLabel.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -233,10 +236,38 @@ public class MediaPlayerController implements Initializable {
             }
         });
 
+        // when the mouse leaves the volume HBox space, hide the volume slider
         volumeHBox.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 volumeHBox.getChildren().remove(volumeSlider);
+            }
+        });
+
+        mediaPlayer.currentTimeProperty().addListener(new ChangeListener<Duration>() {
+            @Override
+            public void changed(ObservableValue<? extends Duration> observableValue, Duration oldTime, Duration newTime) {
+                // check if the slider is not changing
+                if (!timeSlider.isValueChanging())
+                    timeSlider.setValue(newTime.toSeconds());
+                matchEndOfVideo(currentTimeLabel.getText(), totalLengthLabel.getText());
+            }
+        });
+
+        mediaPlayer.setOnEndOfMedia(new Runnable() {
+            @Override
+            public void run() {
+                // at the end of the video, so need to show the replay button
+                playPauseReplayButton.setGraphic(replay);
+                endOfVideo = true;
+                // there is a possibility that where the times do not sync
+                // so we match the text properties
+                if (!currentTimeLabel.textProperty().equals(totalLengthLabel.textProperty())) {
+                    // can not set text of something that is bound to another element
+                    // so unbind it and set the text again
+                    currentTimeLabel.textProperty().unbind();
+                    currentTimeLabel.setText(formatTime(mediaPlayer.getTotalDuration()) + " / ");
+                }
             }
         });
 
@@ -470,5 +501,26 @@ public class MediaPlayerController implements Initializable {
             return String.format("%02d:%02d", mins, secs);
         else
             return String.format("%2d:%02d", mins, secs);
+    }
+
+    // method to check if at the end of video
+    // at end of video when each character of the current time label is the same as the total length label
+    public void matchEndOfVideo(String currTime, String totalTime) {
+        for (int i = 0; i < totalTime.length(); i++) {
+            // if the characters do not match, we are not at the end of the video
+            // so break out of the loop
+            if (currTime.charAt(i) != totalTime.charAt(i)) {
+                endOfVideo = false;
+                if (isPlaying)
+                    playPauseReplayButton.setGraphic(pause);
+                else
+                    playPauseReplayButton.setGraphic(play);
+                break;
+            }
+            else {
+                endOfVideo = true;
+                playPauseReplayButton.setGraphic(replay);
+            }
+        }
     }
 }
