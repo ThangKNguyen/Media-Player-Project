@@ -14,12 +14,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,7 +29,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.Callable;
 
-import javafx.util.Duration;
 
 public class MediaPlayerController implements Initializable {
     @FXML
@@ -56,6 +57,9 @@ public class MediaPlayerController implements Initializable {
 
     @FXML
     private Slider volumeSlider;
+
+    @FXML
+    private HBox volumeHBox;
 
     @FXML
     private Label currentTimeLabel;
@@ -217,6 +221,22 @@ public class MediaPlayerController implements Initializable {
                 if (oldScene == null && newScene != null)
                     // the height of the media view needs to be the height of the scene minus the height of the control hbox
                     mediaView.fitHeightProperty().bind(newScene.heightProperty().subtract(controlsHBox.heightProperty().add(20)));
+            }
+        });
+
+        volumeLabel.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (volumeHBox.lookup("#volumeSlider") == null) {
+                    volumeHBox.getChildren().add(volumeSlider);
+                }
+            }
+        });
+
+        volumeHBox.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                volumeHBox.getChildren().remove(volumeSlider);
             }
         });
 
