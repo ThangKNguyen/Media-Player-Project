@@ -387,10 +387,12 @@ public class MediaPlayerController implements Initializable {
             // if the stage is already fullscreen, exit fullscreen
             if (parentStage.isFullScreen()) {
                 parentStage.setFullScreen(false);
+                mediaView.setPreserveRatio(true);
             }
             // otherwise enter fullscreen
             else {
                 parentStage.setFullScreen(true);
+                mediaView.setPreserveRatio(false);
             }
         });
     }

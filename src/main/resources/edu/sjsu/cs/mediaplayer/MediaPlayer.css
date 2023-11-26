@@ -38,6 +38,11 @@
     -fx-text-fill: black;
     -fx-background-color: linear-gradient(to bottom left, #f78361, #f54b64);
 }
+
+.menu-item:hover {
+    -fx-background-color: linear-gradient(to bottom left, #f2b29d, #c93c52);
+}
+
 .menu-item .label{
     -fx-font-size: 1.2em;
     -fx-text-fill: black;
