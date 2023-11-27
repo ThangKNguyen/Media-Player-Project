@@ -7,6 +7,7 @@
 
 <VBox fx:id="parentVBox" alignment="CENTER" styleClass="file_select_container" stylesheets="@FileSelect.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.sjsu.cs.mediaplayer.FileSelectController">
    <children>
+      <Label fx:id="welcomeLabel" text="Welcome to Home Cinema" styleClass="welcome-text" />
       <Button fx:id="mediaFileButton" mnemonicParsing="false" prefWidth="150.0" style="-fx-cursor: hand;" styleClass="file_select_container" text="Choose media file">
          <VBox.margin>
             <Insets bottom="5.0" />

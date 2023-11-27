@@ -22,3 +22,10 @@
     -fx-font-family: "Calibri";
     -fx-text-fill: #FFFFFF;
 }
+
+.welcome-text {
+    -fx-font-size: 24px;
+    -fx-font-family: "Calibri";
+    -fx-text-fill: white;
+    -fx-padding: 10px;
+}

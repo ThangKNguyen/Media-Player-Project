@@ -57,7 +57,7 @@ public class FileSelectController implements Initializable {
             // show the mp4 file to the user
             if (selectedFile != null) {
                 mediaFilePath = selectedFile.toURI().toString();
-                mediaFileLabel.setText(selectedFile.getName());
+                mediaFileLabel.setText(selectedFile.getName() + " has been selected.");
                 mediaFileLabel.setVisible(true);
                 subtitleFileButton.setVisible(true);
                 watchVideoButton.setVisible(true);
