@@ -11,9 +11,16 @@
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
+
 <VBox fx:id="parentVBox" alignment="CENTER" styleClass="media_player_container" stylesheets="@MediaPlayer.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.sjsu.cs.mediaplayer.MediaPlayerController">
    <children>
       <MediaView fx:id="mediaView" />
+      <Label fx:id="subtitleLabel"
+             layoutX="10" layoutY="350"
+               prefWidth="580" prefHeight="50"
+               text="Subtitles will appear here"
+               wrapText="true"
+               styleClass="subtitle-label"/>
       <Slider fx:id="timeSlider" style="-fx-cursor: hand;">
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

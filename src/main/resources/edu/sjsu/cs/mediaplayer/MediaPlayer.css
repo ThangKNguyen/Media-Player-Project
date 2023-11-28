@@ -51,3 +51,10 @@
 .media_player_container Slider {
     -fx-progress-color: linear-gradient(to bottom left, #f78361, #f54b64);
 }
+
+.subtitle-label {
+    -fx-font-size: 16px;
+    -fx-text-fill: white;
+    -fx-background-color: rgba(0, 0, 0, 0.5);
+    -fx-alignment: center;
+}

@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.Callable;
+import java.util.List;
 
 
 public class MediaPlayerController implements Initializable {
@@ -69,6 +70,9 @@ public class MediaPlayerController implements Initializable {
 
     @FXML
     private Button subtitleButton;
+    private List<SRTParser.Subtitle> subtitlesText;
+    @FXML
+    private Label subtitleLabel;
 
     @FXML
     private MenuButton playbackSpeedMenuButton;
@@ -139,7 +143,7 @@ public class MediaPlayerController implements Initializable {
         setPlaybackSpeeds();
         onVolumeLabel();
         //Testing play, pause, replay button
-        setupMedia(FileSelectController.mediaFilePath);
+        setupMediaAndSubtitles(FileSelectController.mediaFilePath, FileSelectController.srtFilePath);
         playPauseReplayButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -271,7 +275,46 @@ public class MediaPlayerController implements Initializable {
             }
         });
 
+        subtitleButton.setOnAction(event -> {
+            mediaPlayer.currentTimeProperty().addListener(new ChangeListener<Duration>() {
+                @Override
+                public void changed(ObservableValue<? extends Duration> observableValue, Duration oldTime, Duration newTime) {
+                    updateSubtitleText(newTime.toMillis());
+                }
+            });
+        });
+
         onExit();
+    }
+
+    private void updateSubtitleText(double currentTime) {
+        for (SRTParser.Subtitle subtitle : subtitlesText) {
+            Duration start = parseTime(subtitle.startTime);
+            Duration end = parseTime(subtitle.endTime);
+            if (!start.isUnknown() && !end.isUnknown() && currentTime >= start.toMillis() && currentTime < end.toMillis()) {
+                String text = String.join("\n", subtitle.subtitleLines);
+                subtitleLabel.setText(text);
+                break;
+            } else if (currentTime >= end.toMillis()) {
+                subtitleLabel.setText("");
+            }
+        }
+    }
+
+    private Duration parseTime(String timeString) {
+        try {
+            String[] hms = timeString.split(":");
+            String[] secMs = hms[2].split(",");
+            int hours = Integer.parseInt(hms[0]);
+            int minutes = Integer.parseInt(hms[1]);
+            int seconds = Integer.parseInt(secMs[0]);
+            int millis = Integer.parseInt(secMs[1]);
+            return Duration.hours(hours).add(Duration.minutes(minutes)).add(Duration.seconds(seconds)).add(Duration.millis(millis));
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Handle parsing error
+            return Duration.UNKNOWN;
+        }
     }
 
     private void setImages() { // use the images and put them on to their respective ImageView
@@ -377,6 +420,16 @@ public class MediaPlayerController implements Initializable {
         // will setup subtitles later
         else {
             subtitleButton.setVisible(true);
+            SRTParser parser = new SRTParser();
+            srtFilePath = "src/main/srtexample.srt";
+            try {
+                this.subtitlesText = parser.parseSRT(srtFilePath);
+            } catch (IOException e) {
+                e.printStackTrace();
+                // Handle error (e.g., show an alert to the user)
+            }
+
+
         }
     }
 
