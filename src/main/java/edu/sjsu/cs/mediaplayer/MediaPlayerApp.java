@@ -18,7 +18,7 @@ public class MediaPlayerApp extends Application {
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(MediaPlayerApp.class.getResource("FileSelect.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 800);
+        Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
         stage.setTitle("Media Player");
 
         stage.setScene(scene);

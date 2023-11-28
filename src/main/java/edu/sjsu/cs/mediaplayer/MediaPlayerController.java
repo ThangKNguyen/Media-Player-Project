@@ -396,7 +396,7 @@ public class MediaPlayerController implements Initializable {
             Stage stage = (Stage) exit.getScene().getWindow();
             try {
                 // set the scene of the parent stage to the select file page
-                stage.setScene(new Scene(fxmlLoader.load(), 800, 800));
+                stage.setScene(new Scene(fxmlLoader.load(), 1200, 800));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -451,12 +451,12 @@ public class MediaPlayerController implements Initializable {
             // if the stage is already fullscreen, exit fullscreen
             if (parentStage.isFullScreen()) {
                 parentStage.setFullScreen(false);
-                mediaView.setPreserveRatio(true);
+
             }
             // otherwise enter fullscreen
             else {
                 parentStage.setFullScreen(true);
-                mediaView.setPreserveRatio(false);
+
             }
         });
     }

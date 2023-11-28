@@ -18,6 +18,7 @@
     -fx-font-family: 'Saira Extra Condensed', sans-serif;
     -fx-font-size: 1.2em;
     -fx-text-fill:  black;
+    -fx-margin: 15px;
 }
 
 /*.media_player_container MenuButton {
