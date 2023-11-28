@@ -1,0 +1,152 @@
+1
+00:00:00,000 --> 00:00:03,780
+Hey everyone, welcome back and let's write some more neat code today. So today let's
+
+2
+00:00:03,780 --> 00:00:09,780
+solve a pretty easy and popular question invert binary search tree. So all they tell us to
+
+3
+00:00:09,780 --> 00:00:16,140
+do is invert a binary tree. And what exactly does that mean? So let's say that this is
+
+4
+00:00:16,140 --> 00:00:23,020
+our initial tree. To invert it is basically what you can tell in the output, right? So
+
+5
+00:00:23,020 --> 00:00:28,660
+the root stayed the same, but you can see it's two children which were left child to
+
+6
+00:00:28,660 --> 00:00:34,700
+left or right child seven were swapped, right? So seven is now on the other side. Two has
+
+7
+00:00:34,700 --> 00:00:39,920
+been moved, right? So basically we took these and then we swapped them. And when they say
+
+8
+00:00:39,920 --> 00:00:45,300
+invert the binary tree, it's a recursive definition. So take a look at this sub tree, right? You
+
+9
+00:00:45,300 --> 00:00:51,820
+can see since we moved it to this side, that's where it is, right? But notice how even these
+
+10
+00:00:51,820 --> 00:00:57,500
+sub trees are different now, right? One was initially on the left and three was initially
+
+11
+00:00:57,500 --> 00:01:03,500
+on the right, but now three is on the left and one is on the right. The exact same thing
+
+12
+00:01:03,500 --> 00:01:09,700
+happened with this tree, right? It was moved over here to the left side, but then its children
+
+13
+00:01:09,700 --> 00:01:15,280
+were also swapped, right? So nine was moved to the left, six to the right. So when they
+
+14
+00:01:15,280 --> 00:01:23,700
+say invert the binary tree, what we're saying is visit every single node in the tree, right?
+
+15
+00:01:23,700 --> 00:01:31,660
+And every time we visit a node, take a look at its two children and swap the positions
+
+16
+00:01:31,660 --> 00:01:37,520
+of the children, right? So in other words, if we're given a tree, look at the root node
+
+17
+00:01:37,520 --> 00:01:46,580
+and take its children and then swap the positions and then recursively run invert tree on the
+
+18
+00:01:46,580 --> 00:01:52,760
+left sub tree and run invert on the right sub tree. So it's a recursive definition.
+
+19
+00:01:52,760 --> 00:01:57,880
+So we can solve this problem with recursion. We can do a depth first search, whether it's
+
+20
+00:01:57,880 --> 00:02:02,980
+preorder or post order, it doesn't actually matter. A depth first search will allow us
+
+21
+00:02:02,980 --> 00:02:08,400
+to solve this problem recursively. So this problem would probably be a lot more annoying
+
+22
+00:02:08,400 --> 00:02:13,480
+if it were iterative, but luckily we can do it recursively. So we can first check the
+
+23
+00:02:13,480 --> 00:02:19,960
+base case. So if the root is null, then we can return null. We don't have to continue.
+
+24
+00:02:19,960 --> 00:02:26,520
+Otherwise what we're going to do is swap the children. So we're going to save the left
+
+25
+00:02:26,520 --> 00:02:33,080
+value root left in a temporary variable. Then we're going to replace the root left value
+
+26
+00:02:33,080 --> 00:02:39,080
+with root right. And then we're going to replace the root right value with the left value,
+
+27
+00:02:39,080 --> 00:02:44,400
+which we know is now stored in temp. So after we swap the nodes, all we have to do is now
+
+28
+00:02:44,400 --> 00:02:52,620
+recursively invert the sub trees so we can invert the left sub tree and then we can invert
+
+29
+00:02:52,620 --> 00:02:57,920
+the right sub tree. So by doing self dot invert tree, what we're doing is making a recursive
+
+30
+00:02:57,920 --> 00:03:02,960
+call to the function we're inside. And once we have swapped the roots, children, once
+
+31
+00:03:02,960 --> 00:03:07,820
+we have inverted the left sub tree and inverted the right sub tree, we know we're finished.
+
+32
+00:03:07,820 --> 00:03:13,360
+So then we can return the root. So there it is. This problem is relatively short code.
+
+33
+00:03:13,360 --> 00:03:19,140
+It's a very good problem to kind of understand the basics of depth first search and tree
+
+34
+00:03:19,140 --> 00:03:24,400
+problems in general. And it's actually a pretty popular problem. And if you weren't able to
+
+35
+00:03:24,400 --> 00:03:29,720
+solve this on your first try, don't feel too bad. Take a look at this trivia. There was
+
+36
+00:03:29,720 --> 00:03:34,800
+a very good engineer who actually failed this problem in their Google interview, but his
+
+37
+00:03:34,800 --> 00:03:39,960
+career still turned out pretty fine. So I hope this was helpful. If it was, please like
+
+38
+00:03:39,960 --> 00:03:44,360
+and subscribe. It supports the channel a lot and I'll hopefully see you pretty soon.
+

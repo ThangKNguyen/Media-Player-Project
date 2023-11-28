@@ -44,3 +44,8 @@
     -fx-background-color: rgba(0, 0, 0, 0.5);
     -fx-alignment: center;
 }
+
+.media_player_container Button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
