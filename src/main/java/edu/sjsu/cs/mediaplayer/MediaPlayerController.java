@@ -111,7 +111,6 @@ public class MediaPlayerController implements Initializable {
     private String srtFilePath;
     private boolean endOfVideo;
     private boolean isPlaying;
-    private boolean isMuted;
     private double lastVolumeLevel;
 
     private ImageView play;
@@ -226,7 +225,7 @@ public class MediaPlayerController implements Initializable {
             public void changed(ObservableValue<? extends Scene> observableValue, Scene oldScene, Scene newScene) {
                 if (oldScene == null && newScene != null)
                     // the height of the media view needs to be the height of the scene minus the height of the control hbox
-                    mediaView.fitHeightProperty().bind(newScene.heightProperty().subtract(controlsHBox.heightProperty().add(20)));
+                    mediaView.fitHeightProperty().bind(newScene.heightProperty().subtract(controlsHBox.heightProperty().add(50)));
             }
         });
 
@@ -276,12 +275,32 @@ public class MediaPlayerController implements Initializable {
         });
 
         subtitleButton.setOnAction(event -> {
+            if (subtitleLabel.isVisible())
+                subtitleLabel.setVisible(false);
+            else subtitleLabel.setVisible(true);
             mediaPlayer.currentTimeProperty().addListener(new ChangeListener<Duration>() {
                 @Override
                 public void changed(ObservableValue<? extends Duration> observableValue, Duration oldTime, Duration newTime) {
                     updateSubtitleText(newTime.toMillis());
                 }
             });
+        });
+
+        mediaView.setOnMouseClicked(event -> {
+            if (endOfVideo) {
+                timeSlider.setValue(0);
+                endOfVideo = false;
+                isPlaying = false;
+            }
+            if (isPlaying) {
+                playPauseReplayButton.setGraphic(play);
+                mediaPlayer.pause();
+                isPlaying = false;
+            } else {
+                playPauseReplayButton.setGraphic(pause);
+                mediaPlayer.play();
+                isPlaying = true;
+            }
         });
 
         onExit();
@@ -397,6 +416,7 @@ public class MediaPlayerController implements Initializable {
         mediaPlayer = new MediaPlayer(media);
         mediaView.setMediaPlayer(mediaPlayer);
         mediaPlayer.setAutoPlay(true);
+        subtitleLabel.setVisible(false);
         isPlaying = true;
         bindTimeSliderAndCurrentTimeLabel();
         mediaPlayer.totalDurationProperty().addListener(new ChangeListener<Duration>() {
@@ -421,7 +441,6 @@ public class MediaPlayerController implements Initializable {
         else {
             subtitleButton.setVisible(true);
             SRTParser parser = new SRTParser();
-            srtFilePath = "src/main/srtexample.srt";
             try {
                 this.subtitlesText = parser.parseSRT(srtFilePath);
             } catch (IOException e) {

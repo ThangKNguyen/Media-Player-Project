@@ -73,13 +73,16 @@ public class FileSelectController implements Initializable {
         subtitleFileButton.setOnAction(event -> {
             FileChooser fileChooser = new FileChooser();
             // restrict the file type to .srt
-            FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Select a file (*.srt)", "*.srt");
-            fileChooser.getExtensionFilters().add(filter);
-            File file = fileChooser.showOpenDialog(null);
-            srtFilePath = file.toURI().toString();
+            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Select a file (*.srt)", "*.srt"));
+            File selectedFile = fileChooser.showOpenDialog(((Node) event.getTarget()).getScene().getWindow());
             // show the srt file to the user
-            if (srtFilePath != null) {
-                subtitleFileLabel.setText(srtFilePath);
+            if (selectedFile != null) {
+                srtFilePath = selectedFile.toString();
+                subtitleFileLabel.setText(selectedFile.getName() + " has been selected.");
+                subtitleFileLabel.setVisible(true);
+            }
+            else {
+                subtitleFileLabel.setText("No *srt file selected.");
                 subtitleFileLabel.setVisible(true);
             }
         });
