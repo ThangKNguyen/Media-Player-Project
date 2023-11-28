@@ -1,27 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Saira+Extra+Condensed:wght@300&display=swap');
+
 .media_player_container {
-    -fx-background-color: #404040;
+    -fx-background-color: #a9bcd0ff;
 }
 
 .media_player_container Text {
-    -fx-font-family: "Calibri";
+    -fx-font-family: 'Saira Extra Condensed', sans-serif;
     -fx-text-fill: black;
 }
 
 .media_player_container Label {
-    -fx-font-family: "Calibri";
+    -fx-font-family: 'Saira Extra Condensed', sans-serif;
     -fx-text-fill: black;
 }
 
-.media_player_container Button {
-    -fx-background-color: linear-gradient(to bottom left, #f78361, #f54b64);
-}
-
-.media_player_container Button:hover {
-    -fx-background-color: linear-gradient(to bottom left, #f2b29d, #c93c52);
-}
-
 .media_player_container MenuButton Text {
-    -fx-font-family: "Calibri";
+    -fx-font-family: 'Saira Extra Condensed', sans-serif;
     -fx-font-size: 1.2em;
     -fx-text-fill:  black;
 }
@@ -34,15 +28,6 @@
     -fx-background-color: linear-gradient(to bottom left, #f2b29d, #c93c52);
 } */
 
-.menu-item {
-    -fx-text-fill: black;
-    -fx-background-color: linear-gradient(to bottom left, #f78361, #f54b64);
-}
-
-.menu-item:hover {
-    -fx-background-color: linear-gradient(to bottom left, #f2b29d, #c93c52);
-}
-
 .menu-item .label{
     -fx-font-size: 1.2em;
     -fx-text-fill: black;
@@ -50,4 +35,11 @@
 
 .media_player_container Slider {
     -fx-progress-color: linear-gradient(to bottom left, #f78361, #f54b64);
+}
+
+.subtitle-label {
+    -fx-font-size: 16px;
+    -fx-text-fill: white;
+    -fx-background-color: rgba(0, 0, 0, 0.5);
+    -fx-alignment: center;
 }

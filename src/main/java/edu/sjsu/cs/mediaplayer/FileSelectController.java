@@ -33,7 +33,7 @@ public class FileSelectController implements Initializable {
 
     //Changed from private to protected static, for mediaPlayerController to access
     protected static String mediaFilePath;
-    private String srtFilePath;
+    protected static String srtFilePath;
     private Parent root;
 
 
