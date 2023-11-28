@@ -100,17 +100,17 @@ public class FileSelectController implements Initializable {
             }
 
             // create instance of MediaPlayerController so you can access the methods of the class
-            MediaPlayerController mediaPlayerController = fxmlLoader.getController();
+            //MediaPlayerController mediaPlayerController = fxmlLoader.getController();
 
             if (mediaFilePath != null && srtFilePath != null) {
-                mediaPlayerController.setupMediaAndSubtitles(mediaFilePath, srtFilePath);
+                //mediaPlayerController.setupMediaAndSubtitles(mediaFilePath, srtFilePath);
                 // get the parent stage of the current scene
                 Stage stage = (Stage) watchVideoButton.getScene().getWindow();
                 // set the scene of the parent stage to the media player
                 stage.setScene(new Scene(root, 800, 800));
             }
             else if (mediaFilePath != null && srtFilePath == null) {
-                mediaPlayerController.setupMediaAndSubtitles(mediaFilePath, null);
+                //mediaPlayerController.setupMediaAndSubtitles(mediaFilePath, null);
                 // get the parent stage of the current scene
                 Stage stage = (Stage) watchVideoButton.getScene().getWindow();
                 // set the scene of the parent stage to the media player

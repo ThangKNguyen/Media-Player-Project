@@ -127,6 +127,8 @@ public class MediaPlayerController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        setupMediaAndSubtitles(FileSelectController.mediaFilePath, FileSelectController.srtFilePath);
+
         // put the ImageViews to the respective buttons
         setImages();
         playPauseReplayButton.setGraphic(pause);
@@ -141,8 +143,6 @@ public class MediaPlayerController implements Initializable {
         onFullscreen();
         setPlaybackSpeeds();
         onVolumeLabel();
-        //Testing play, pause, replay button
-        setupMediaAndSubtitles(FileSelectController.mediaFilePath, FileSelectController.srtFilePath);
         playPauseReplayButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -263,14 +263,6 @@ public class MediaPlayerController implements Initializable {
                 // at the end of the video, so need to show the replay button
                 playPauseReplayButton.setGraphic(replay);
                 endOfVideo = true;
-                // there is a possibility that where the times do not sync
-                // so we match the text properties
-                if (!currentTimeLabel.textProperty().equals(totalLengthLabel.textProperty())) {
-                    // can not set text of something that is bound to another element
-                    // so unbind it and set the text again
-                    currentTimeLabel.textProperty().unbind();
-                    currentTimeLabel.setText(formatTime(mediaPlayer.getTotalDuration()) + " / ");
-                }
             }
         });
 
