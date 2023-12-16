@@ -1,5 +1,5 @@
 # Team 11: Media Player
-## Team Members: Arden Yan, Davel Randindra, Thang Nguyen
+### Team Members: Arden Yan, Davel Randindra, Thang Nguyen
 
 ### Contributions
 In the development of the project proposal, presentation and code, all of our team members - Arden Yan, Davel Radindra, and Thang Nguyen - worked collaboratively, ensuring a harmonious and integrated approach. Each member brought their unique strengths and perspectives to the table, resulting in a well-rounded and cohesive proposal. Similarly, for the presentation, we united our skills to create a compelling and informative showcase of our project, with each member actively participating in the design, content, and delivery of the presentation. Regarding the development of the code, there were not many divisions of labor as all of us try to implement features one by one collectively, filling out gaps of other team members. Though, there are some things that each team member focused on more in the code development process.
