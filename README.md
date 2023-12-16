@@ -32,7 +32,7 @@ Nowadays, multimedia consumption has been an integral part of a lot of people’
 - Targets a wide range of users
 
 ### Diagrams
-- [Class Diagrams](diagram/class-diagrams.png)
+- [Class Diagrams](diagram/class-diagram.png)
 - [Use Case Diagram](diagram/usecase-diagram.png)
 - [State Diagram](diagram/state-diagram.png)
 - [Sequence Diagram](diagram/sequence-diagram.png)
