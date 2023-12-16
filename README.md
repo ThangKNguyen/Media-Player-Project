@@ -11,12 +11,12 @@ In the development of the project proposal, presentation, and code, all of our t
 
 #### Presentation Contributions [(Presentation Slides)](diagram/presentation-slides.pdf)
 - Arden Yan: Class diagrams, sequence diagram, Scene Builder, project demo, questions
-- Davel Randindra
+- Davel Randindra: Project approach, use case diagram, state diagram, testing, challenges, subtitles
 - Thang Nguyen: Project introduction, UI/UX design approach, controlling the application during demo
 
 #### Project Proposal Contributions
 - Arden Yan: assumptions, operations, solution
-- Davel Randindra:
+- Davel Randindra: Approach and functionalities
 - Thang Nguyen: Described the problem statements and set up files on Github
 
 
