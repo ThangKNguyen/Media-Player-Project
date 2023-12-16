@@ -9,7 +9,7 @@ In the development of the project proposal, presentation and code, all of our te
 - Davel Radindra: Integrated subtitle support and assisted in adding functionalities of playback controls.
 - Thang Nguyen: Improved buttons functionalities. Executed the design and implementation of graphical user interface.
 
-#### Presentation Contributions [(Presentation Slides)](diagrams/presentation-slides.pdf)
+#### Presentation Contributions [(Presentation Slides)](diagram/presentation-slides.pdf)
 - Arden Yan: Class diagrams, sequence diagram, Scene Builder, project demo, questions
 - Davel Randindra
 - Thang Nguyen: Project introduction, UI/UX design approach, controlling the application during demo
